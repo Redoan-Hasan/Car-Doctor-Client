@@ -23,6 +23,7 @@
             .then(res => res.json())
             .then(data => {
                 if(data.deletedCount > 0){
+                    // eslint-disable-next-line no-unused-vars
                     setYourOrders(deletedOrder => yourOrders.filter(order => order._id != id))
                     alert('Order Deleted')
                 }

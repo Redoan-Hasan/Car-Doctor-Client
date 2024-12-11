@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const SingleService = ({ singleData }) => {
-    console.log(singleData);
+    // console.log(singleData);
     return (
         <div className=" p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
         <img
