@@ -1,16 +1,16 @@
     import { useContext, useEffect, useState } from "react";
     import { AuthContext } from "../../AuthProvider/AuthProvider";
+import axios from "axios";
 
     const YourOrders = () => {
     const { user } = useContext(AuthContext);
     const [yourOrders, setYourOrders] = useState([]);
     console.log(yourOrders);
     useEffect(() => {
-        fetch(`http://localhost:5000/userOrders?email=${user?.email}`)
-        .then((res) => res.json())
+        axios.get(`http://localhost:5000/userOrders?email=${user?.email}` , {withCredentials: true})
         .then((data) => {
-            console.log(data);
-            setYourOrders(data);
+            console.log(data.data);
+            setYourOrders(data.data);
         });
     }, [user]);
 

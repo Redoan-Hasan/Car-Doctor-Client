@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import SingleService from "./SingleService";
+import axios from "axios";
 
 
 const Services = () => {
     const [data,setData] = useState([])
     console.log(data);
     useEffect(()=>{
-        fetch('http://localhost:5000/services')
-        .then(res => res.json())
-        .then(data=> setData(data))
+        // fetch('http://localhost:5000/services')
+        // .then(res => res.json())
+        // .then(data=> setData(data))
+        axios.get('http://localhost:5000/services', {withCredentials: true})
+        .then(res => {
+            setData(res.data)
+        })
     },[])
     return (
         <div>

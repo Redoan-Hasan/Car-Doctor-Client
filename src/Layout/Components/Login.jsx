@@ -1,5 +1,4 @@
 import { useContext } from "react";
-// eslint-disable-next-line no-unused-vars
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
@@ -7,8 +6,8 @@ import axios from "axios";
 
 const Login = () => {
     const {logIn}=useContext(AuthContext)
-    // const location = useLocation();
-    // const navigate = useNavigate()
+    const location = useLocation();
+    const navigate = useNavigate()
     const handleLogin = e =>{
         e.preventDefault();
         const email = e.target.email.value;
@@ -17,10 +16,10 @@ const Login = () => {
         logIn(email,password)
         .then(result => {
             console.log(result);
-            // navigate(location?.state ? location?.state : '/')
+            navigate(location?.state ? location?.state : '/')
             const accessTokenUser = {email}
             // axios 
-            axios.post('http://localhost:5000/jwt' , accessTokenUser )
+            axios.post('http://localhost:5000/jwt' , accessTokenUser,{withCredentials: true} )
             .then(data =>{
                 console.log(data.data)
             })
