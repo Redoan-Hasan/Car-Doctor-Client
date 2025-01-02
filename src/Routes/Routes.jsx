@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 
 import Root from "../Layout/Root";
@@ -10,31 +9,43 @@ import YourOrders from "../Layout/Components/YourOrders";
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
         path: "/",
-        element: <Root />,
-        children: [
-            {
-                path: '/',
-                element: <Home />
-            },
-            {
-                path: "/login",
-                element:<Login />
-            },
-            {
-                path: "/register",
-                element: <Register /> 
-            },
-            {
-                path:'/check/:id',
-                element: <PrivateRoute><CheckOut /></PrivateRoute>,
-                loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
-            },
-            {
-                path: '/yourOrders',
-                element: <PrivateRoute> <YourOrders /> </PrivateRoute>
-            }
-        ]
-    },
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/check/:id",
+        element: (
+          <PrivateRoute>
+            <CheckOut />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://car-doctor-server-fawn-phi.vercel.app/services/${params.id}`
+          ),
+      },
+      {
+        path: "/yourOrders",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <YourOrders />{" "}
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);
